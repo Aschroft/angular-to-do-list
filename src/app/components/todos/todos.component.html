@@ -1,0 +1,31 @@
+<div class="add-todo-form text-center">
+    <h1>Add Todo</h1>
+    <div class="form-group">
+        <input class="form-control input-lg" type="text" [(ngModel)]="name" placeholder="Add Todo..." autofocus #todoText>
+        <br>
+        <button class="btn btn-primary btn-block" (click)="postTodos()">Create</button>
+    </div>
+</div>
+
+<div class="todo-list">
+    <div *ngFor="let todo of todos; let i = index">
+
+        <div class="col-md-1">
+            <input type="checkbox" [checked]="todo.isCompleted" (click)="checkTodo(i)">
+        </div>
+
+        <div class="col-md-9">
+            <div *ngIf="!editMode[i]"> {{todo.text}} </div>
+            <div *ngIf="editMode[i]">
+                <input class="form-control" type="text" [(ngModel)]="todo.text" autofocus #todoText>
+            </div>
+        </div>
+
+        <div id="snackbar">Failed to post a new to-do-list, check if todo name is empty</div>
+
+        <div class="col-md3 btns">
+            <input type="button" class="btn btn-default pull-left" (click)="editTodo(i)" value="Edit">
+            <input type="button" class="btn btn-danger pull-right" (click)="deleteTodo(i)" value="Delete">
+        </div>
+    </div>
+</div>
