@@ -10,6 +10,7 @@ import { Todo } from '../../todo';
 export class TodosComponent implements OnInit {
     todos: Todo[] = [];
     editMode: any[] = [];
+    errorMessage: any = '';
     name: any = '';
 
     constructor(
@@ -31,7 +32,7 @@ export class TodosComponent implements OnInit {
 
     postTodos() {
         if (this.name === '') {
-            this.showSnackbar();
+            this.showSnackbar("Failed to post a new to-do-list, check if todo name is empty");
             return;
         } else {
             const content = {
@@ -105,7 +106,10 @@ export class TodosComponent implements OnInit {
         });
     }
 
-    showSnackbar() {
+    showSnackbar(errorMesssage: any) {
+        // Change error message
+        this.errorMessage = errorMesssage;
+
         // Get the snackbar DIV
         var x: any = document.getElementById("snackbar");
       
